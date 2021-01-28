@@ -40,7 +40,7 @@ load.libs <- c(
 options(install.packages.check.source = "no")
 options(install.packages.compile.from.source = "never")
 if (!require("pacman")) install.packages("pacman"); library(pacman)
-p_load(load.libs, update = TRUE, character.only = TRUE)
+p_load(load.libs, update = FALSE, character.only = TRUE)
 status <- sapply(load.libs,require,character.only = TRUE)
 if(all(status)){
     print("SUCCESS: You have successfully installed and loaded all required libraries.")
@@ -75,7 +75,7 @@ E13vR[["percent.mt"]] <- PercentageFeatureSet(E13vR, pattern = "^mt-")
 ### Then we can plot few QC values for visual inspection. These three being the most common values to plot. Please note that in these plots each dot is individual cell.
 ```
 
-### b) Plot QC values (Question 1: What are these values, how would you interpret the results?)
+### b) Plot QC values (Question 1)
 ```{r Plot QC values}
 E13vR.p1 <- VlnPlot(E13vR, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 E13vR.p1
@@ -123,7 +123,7 @@ E13vR.filt.top10 <- head(VariableFeatures(E13vR.filt), 10)
 ### Naturally these features are also perhaps the first biologically interesting result, as those are the genes which do have most variance in their expression within measured pool of cells.We can plot these for further consideration and validation that sample seems to be biologically valid for this context.
 ```
 
-### a) Plot variable features (Question 2: What are these features? What do they represent?)
+### a) Plot variable features (Question 2)
 ```{r Plot variable features}
 E13vR.p3 <- VariableFeaturePlot(E13vR.filt)
 E13vR.p4 <- LabelPoints(plot = E13vR.p3, points = E13vR.filt.top10, repel = TRUE, ynudge=0, xnudge=0)
@@ -153,7 +153,7 @@ E13vR.filt  <- RunPCA(E13vR.filt, features = VariableFeatures(object = E13vR.fil
 ### One key information to get from dimension reduction is that what is function between std and number of components. Each component captures certain amount of std but that number reduces quickly as more components are taken into account. Question goes that how many components you need to capture essential std? This is a number one needs in further analysis as it is basicly the number of dimensions to be used. 
 ```
 
-## 8.	Plot Std vs PC components (Question 4:This is important plot, what does it tell? How it is related to previous question?)
+## 8.	Plot Std vs PC components (Question 4)
 ```{r Plot Std vs PC components}
 E13vR.p4 <- ElbowPlot(E13vR.filt, ndims = 30)
 E13vR.p4
@@ -163,7 +163,7 @@ E13vR.p4
 ### The number of dimensions is used first to computationally find clusters of cells within that n-dimensional space. In this case you case decide the number of dimensions used, example code below uses 1:14.
 ```
 
-## 9.	Find clusters of cells within the reduced dimensional space (Question 5: Clusters based on what?)
+## 9.	Find clusters of cells within the reduced dimensional space (Question 5)
 ```{r Find clusters of cells withint the reduced dimensional space}
 E13vR.filt <- FindNeighbors(E13vR.filt, dims = 1:14)
 E13vR.filt <- FindClusters(E13vR.filt, resolution = 1)
@@ -214,7 +214,7 @@ FeaturePlot(E13vR.filt, features = serot.markers, cols = c("lightgrey", "darkred
 ### Once we have found the cluster of interesting cells we could go-on and ask that what characterizes this cluster of cells from the other cells, naturally based on gene expression as those are the features measured and available now. We run test from Seurat which compares a specific cluster against the others in terms of gene expression.
 ```
 
-## 13.	Finding genes expressed in serotonergic cluster (Question 7: Are these specific for 5-HT neuron precursors? What is the difference between expressed and diff. expressed? What is the third possible way to characterize uniqueness of a transcriptomic profile?)
+## 13.	Finding genes expressed in serotonergic cluster (Question 7)
 ```{r Finding serotonergic cluster specific gene expression}
 serot.cluster.diff.exp <- as_tibble(FindMarkers(E13vR.filt, ident.1 = 19, verbose = FALSE), rownames = "Symbol")
 filter(serot.cluster.diff.exp, p_val_adj < 0.05, avg_log2FC > .5)
@@ -335,7 +335,7 @@ wpid2gene <- wp2gene %>% dplyr::select(wpid,gene) #TERM2GENE
 wpid2name <- wp2gene %>% dplyr::select(wpid,name) #TERM2NAME
 ```
 
-### a) Calculate and plot ORA for WikiPathways (Question 10)
+### a) Calculate and plot ORA for WikiPathways (Question 10) 
 ```{r Calculate ORA}
 Wiki.ORA <- enricher(list.of.genes.up.entrez$ENTREZID, TERM2GENE = wpid2gene, TERM2NAME = wpid2name)
 ewp <- DOSE::setReadable(Wiki.ORA, org.Mm.eg.db, keyType = "ENTREZID")
