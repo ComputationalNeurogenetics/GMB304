@@ -1,6 +1,6 @@
 ---
 title: "R markdown notebook of bioinformatics pipeline used in GMB304 Methods in functional genetics and development course"
-output: 
+output:
   html_notebook:
     fig_caption: yes
     toc: true
@@ -21,34 +21,46 @@ output:
 
 ## Loading libraries
 ```{r Loading libraries, include=TRUE}
-load.libs <- c(
-  "DOSE",
-  #"GO.db",
-  #"GSEABase",
-  "org.Mm.eg.db",
-  "clusterProfiler",
-  "dplyr",
-  "tidyr",
-  "ggplot2",
-  "stringr",
-  #"RColorBrewer",
-  "rWikiPathways",
-  "Seurat",
-  "pathview",
-  "msigdbr")
-  #"RCy3")
-options(install.packages.check.source = "no")
-options(install.packages.compile.from.source = "never")
-if (!require("pacman")) install.packages("pacman"); library(pacman)
-p_load(load.libs, update = FALSE, character.only = TRUE)
-status <- sapply(load.libs,require,character.only = TRUE)
-if(all(status)){
-    print("SUCCESS: You have successfully installed and loaded all required libraries.")
-} else{
-    cat("ERROR: One or more libraries failed to install correctly. Check the following list for FALSE cases and try again...\n\n")
-    status
-}
-set.seed(2020)
+library(DOSE)
+library(org.Mm.eg.db)
+library(clusterProfiler)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(stringr)
+library(Seurat)
+library(pathview)
+library(msigdbr)
+library(rWikiPathways)
+
+# load.libs <- c(
+#   "DOSE",
+#   #"GO.db",
+#   #"GSEABase",
+#   "org.Mm.eg.db",
+#   "clusterProfiler",
+#   "dplyr",
+#   "tidyr",
+#   "ggplot2",
+#   "stringr",
+#   #"RColorBrewer",
+#   "rWikiPathways",
+#   "Seurat",
+#   "pathview",
+#   "msigdbr")
+#   #"RCy3")
+# options(install.packages.check.source = "no")
+# options(install.packages.compile.from.source = "never")
+# if (!require("pacman")) install.packages("pacman"); library(pacman)
+# p_load(load.libs, update = FALSE, character.only = TRUE)
+# status <- sapply(load.libs,require,character.only = TRUE)
+# if(all(status)){
+#     print("SUCCESS: You have successfully installed and loaded all required libraries.")
+# } else{
+#     cat("ERROR: One or more libraries failed to install correctly. Check the following list for FALSE cases and try again...\n\n")
+#     status
+# }
+# set.seed(2020)
 ```
 
 ```{r}
@@ -150,7 +162,7 @@ E13vR.filt  <- RunPCA(E13vR.filt, features = VariableFeatures(object = E13vR.fil
 ```
 
 ```{r}
-### One key information to get from dimension reduction is that what is function between std and number of components. Each component captures certain amount of std but that number reduces quickly as more components are taken into account. Question goes that how many components you need to capture essential std? This is a number one needs in further analysis as it is basicly the number of dimensions to be used. 
+### One key information to get from dimension reduction is that what is function between std and number of components. Each component captures certain amount of std but that number reduces quickly as more components are taken into account. Question goes that how many components you need to capture essential std? This is a number one needs in further analysis as it is basicly the number of dimensions to be used.
 ```
 
 ## 8.	Plot Std vs PC components (Question 4)
@@ -190,7 +202,7 @@ E13vR.p5
 ```
 
 ```{r}
-### UMAP is also useful for projecting any quantitative or qualitative information of cells as color on the UMAP. Thus in next code we check how certain key neuronal genes are expressed in each cell. Perhaps these already start to give you understanding which clusters contain which kind of cells. 
+### UMAP is also useful for projecting any quantitative or qualitative information of cells as color on the UMAP. Thus in next code we check how certain key neuronal genes are expressed in each cell. Perhaps these already start to give you understanding which clusters contain which kind of cells.
 ```
 
 ### b) With expression of some key neuronal genes as colored overlay
@@ -335,7 +347,7 @@ wpid2gene <- wp2gene %>% dplyr::select(wpid,gene) #TERM2GENE
 wpid2name <- wp2gene %>% dplyr::select(wpid,name) #TERM2NAME
 ```
 
-### a) Calculate and plot ORA for WikiPathways (Question 10) 
+### a) Calculate and plot ORA for WikiPathways (Question 10)
 ```{r Calculate ORA}
 Wiki.ORA <- enricher(list.of.genes.up.entrez$ENTREZID, TERM2GENE = wpid2gene, TERM2NAME = wpid2name)
 ewp <- DOSE::setReadable(Wiki.ORA, org.Mm.eg.db, keyType = "ENTREZID")
