@@ -19,7 +19,7 @@ output:
 ### Please note that this file contains mixture of R-code and something called rmarkdown. For your work in this course you can ignore rmarkdown code as it is just used to form this document and its html version. Rmarkdown code is above this text as well as around each "chunk" of R code below, so any line of form of ```{r }" or ``` are rmarkdown code and R code of the chunk in question is between those lines.
 ```
 
-## Loading libraries
+## 1. Loading libraries
 ```{r Loading libraries, include=TRUE}
 library(DOSE)
 library(org.Mm.eg.db)
