@@ -304,7 +304,7 @@ plot(img)
 
 ### f) Calculate and plot ORA in Allen Brain Atlas
 ```{r Calculate ORA in Allen Brain Atlas}
-loc2gene <- read.gmt("../mm10/gene_set_library_up_crisp.gmt")
+loc2gene <- read.gmt("../gene_set_library_up_crisp.gmt")
 allen.ORA <- enricher(toupper(list.of.genes.up), TERM2GENE = loc2gene)
 dotplot(allen.ORA)
 head(allen.ORA)
