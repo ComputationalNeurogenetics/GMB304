@@ -32,35 +32,6 @@ library(Seurat)
 library(pathview)
 library(msigdbr)
 library(rWikiPathways)
-
-# load.libs <- c(
-#   "DOSE",
-#   #"GO.db",
-#   #"GSEABase",
-#   "org.Mm.eg.db",
-#   "clusterProfiler",
-#   "dplyr",
-#   "tidyr",
-#   "ggplot2",
-#   "stringr",
-#   #"RColorBrewer",
-#   "rWikiPathways",
-#   "Seurat",
-#   "pathview",
-#   "msigdbr")
-#   #"RCy3")
-# options(install.packages.check.source = "no")
-# options(install.packages.compile.from.source = "never")
-# if (!require("pacman")) install.packages("pacman"); library(pacman)
-# p_load(load.libs, update = FALSE, character.only = TRUE)
-# status <- sapply(load.libs,require,character.only = TRUE)
-# if(all(status)){
-#     print("SUCCESS: You have successfully installed and loaded all required libraries.")
-# } else{
-#     cat("ERROR: One or more libraries failed to install correctly. Check the following list for FALSE cases and try again...\n\n")
-#     status
-# }
-# set.seed(2020)
 ```
 
 ```{r}
@@ -304,7 +275,7 @@ plot(img)
 
 ### f) Calculate and plot ORA in Allen Brain Atlas
 ```{r Calculate ORA in Allen Brain Atlas}
-loc2gene <- read.gmt("../gene_set_library_up_crisp.gmt")
+loc2gene <- read.gmt(".÷/gene_set_library_up_crisp.gmt")
 allen.ORA <- enricher(toupper(list.of.genes.up), TERM2GENE = loc2gene)
 dotplot(allen.ORA)
 head(allen.ORA)
@@ -334,7 +305,7 @@ g2m.genes <- str_to_title(cc.genes$g2m.genes)
 E13vR.filt <- CellCycleScoring(E13vR.filt, s.features = s.genes, g2m.features = g2m.genes, set.ident = TRUE)
 
 FeaturePlot(E13vR.filt, features = c("S.Score"), cols = c("lightgrey", "darkred"))
-FeaturePlot(E13vR.filt.cc, features = "G2M.Score", cols = c("lightgrey", "darkred"))
+FeaturePlot(E13vR.filt, features = "G2M.Score", cols = c("lightgrey", "darkred"))
 DimPlot(E13vR.filt)
 ```
 
@@ -362,3 +333,5 @@ ewp.wpids <- ewp$ID
 url <- getPathwayInfo("WP1266")$url
 browseURL(url)
 ```
+
+
