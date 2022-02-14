@@ -51,5 +51,9 @@ b) Explore WikiPathways for further insight
 
 # 3	Find Nkx2-2 positive progenitor and Fev positive precursor cell groups. Do differential expression comparison between these two groups to characterize main differences in their transcriptomes.
 ```{r}
-# Use FindMarkers() from Seurat to calculate this
+# Find Nkx2-2 positive progenitor group with FeaturePlot
+# Find Fev positive precursor cell group with FeaturePlot
+# Run FindMarkers() between these groups
+# What do you find? Would it make sense to look some ORA enrichment among genes specific for either one?
+
 ```
