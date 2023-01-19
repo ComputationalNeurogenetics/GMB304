@@ -1,5 +1,4 @@
 ---
-title: "R markdown notebook of bioinformatics pipeline used in GMB304 Methods in functional genetics and development course - Workflow 1"
 output:
   html_notebook:
     fig_caption: yes
@@ -20,12 +19,11 @@ output:
 ```
 
 ```{r Install additional libraries}
-# R image used in CSC notebooks environment does not yet have all libraries installed. You should install missing ones.
+### R image used in CSC notebooks environment does not yet have all libraries installed. You should install missing ones.
 BiocManager::install(c("DOSE","clusterProfiler", "org.Mm.eg.db","pathview", "msigdbr","rWikiPathways"))
 
-# In the end answer "n" to question to update some other packages 
+### In the end answer "n" to question to update some other packages 
 ```
-
 
 ## 1. Loading libraries
 ```{r Loading libraries, include=TRUE}
@@ -101,7 +99,7 @@ E13vR.filt <- NormalizeData(E13vR.filt)
 ```
 
 ```{r}
-### Seurat objects also store information about variable features, which in this case means genes, as this data has been processed to the level of genes. One needs to set number of variable features via argument and then there is ready function to find that many most variable features and stote that into object structure. It is then used further downstream in the analysis.
+### Seurat objects also store information about variable features, which in this case means genes, as this data has been processed to the level of genes. One needs to set number of variable features via argument and then there is ready function to find that many most variable features and store that into object structure. It is then used further downstream in the analysis.
 ```
 
 ## 5.	Find variable features
