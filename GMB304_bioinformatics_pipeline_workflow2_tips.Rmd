@@ -7,7 +7,9 @@ output:
     code_folding: show
 ---
 
-
+```{r}
+### This part of the work package 3 requires you to modify and write code based on what you have learned. If there is any code in following chunks of R markdown code those are meant to be either tips or particularly hard parts of code of which learning is outside of the context of this course.
+```
 
 # 1.	Search for proliferative progenitors of 5-HT cells
 a)	Use Nkx2-2 gene as marker for proliferative cells, projecting its expression to UMAP
@@ -55,5 +57,4 @@ b) Explore WikiPathways for further insight
 # Find Fev positive precursor cell group with FeaturePlot
 # Run FindMarkers() between these groups
 # What do you find? Would it make sense to look some ORA enrichment among genes specific for either one?
-
 ```
