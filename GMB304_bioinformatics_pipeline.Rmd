@@ -18,9 +18,9 @@ output:
 ### Please note that this file contains mixture of R-code and something called rmarkdown. For your work in this course you can ignore rmarkdown code as it is just used to form this document and its html version. Rmarkdown code is above this text as well as around each "chunk" of R code below, so any line of form of ```{r }" or ``` are rmarkdown code and R code of the chunk in question is between those lines.
 ```
 
-```{r Install additional libraries}
+```{r Install additional libraries, include=FALSE}
 ### R image used in CSC notebooks environment does not yet have all libraries installed. You should install missing ones.
-BiocManager::install(c("DOSE","clusterProfiler", "org.Mm.eg.db","pathview", "msigdbr","rWikiPathways"))
+BiocManager::install(c("DOSE","clusterProfiler", "org.Mm.eg.db","pathview", "msigdbr","rWikiPathways","magick"))
 
 ### In the end answer "n" to question to update some other packages 
 ```
@@ -274,14 +274,13 @@ mmu04726 <- pathview(gene.data  = values.for.pathway.vis,
 ```
 
 ```{r echo=FALSE}
-require(magick)
 img <- magick::image_read('./mmu04726.pathview.png')
 plot(img)
 ```
 
 ### f) Calculate and plot ORA in Allen Brain Atlas
 ```{r Calculate ORA in Allen Brain Atlas}
-loc2gene <- read.gmt(".÷/gene_set_library_up_crisp.gmt")
+loc2gene <- read.gmt("./gene_set_library_up_crisp.gmt")
 allen.ORA <- enricher(toupper(list.of.genes.up), TERM2GENE = loc2gene)
 dotplot(allen.ORA)
 head(allen.ORA)
