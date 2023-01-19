@@ -1,4 +1,5 @@
 ---
+title: "R markdown notebook of bioinformatics pipeline used in GMB304 Methods in functional genetics and development course - Workflow 1"
 output:
   html_notebook:
     fig_caption: yes
@@ -208,7 +209,7 @@ FeaturePlot(E13vR.filt, features = serot.markers, cols = c("lightgrey", "darkred
 ```{r Finding serotonergic cluster specific gene expression}
 serot.cluster.diff.exp <- as_tibble(FindMarkers(E13vR.filt, ident.1 = 19, verbose = FALSE), rownames = "Symbol")
 filter(serot.cluster.diff.exp, p_val_adj < 0.05, avg_log2FC > .5)
-# Note and specific catch here is also that question is generic "What are the gene products expressed in the 5-HT neuron precursors?", but actually this analysis reveals differential expression not specific answer to "what is expressed". Latter being actually quite a lot of harder question to solve.
+# Note specific catch here is also that question is not very well defined "What are the gene products expressed in the 5-HT neuron precursors?", but actually this analysis reveals differential expression not specific answer to "what is expressed". Latter being actually quite a lot of harder question to solve.
 ```
 
 ```{r}
