@@ -19,6 +19,14 @@ output:
 ### Please note that this file contains mixture of R-code and something called rmarkdown. For your work in this course you can ignore rmarkdown code as it is just used to form this document and its html version. Rmarkdown code is above this text as well as around each "chunk" of R code below, so any line of form of ```{r }" or ``` are rmarkdown code and R code of the chunk in question is between those lines.
 ```
 
+```{r Install additional libraries}
+# R image used in CSC notebooks environment does not yet have all libraries installed. You should install missing ones.
+BiocManager::install(c("DOSE","clusterProfiler", "org.Mm.eg.db","pathview", "msigdbr","rWikiPathways"))
+
+# In the end answer "n" to question to update some other packages 
+```
+
+
 ## 1. Loading libraries
 ```{r Loading libraries, include=TRUE}
 library(DOSE)
@@ -40,7 +48,7 @@ library(rWikiPathways)
 
 ## 2.	Reading dataset into R from sequencing machine output files and form Seurat object from it.
 ```{r Reading dataset into R ja turn into Seurat object}
-E13vR.data <- Read10X(data.dir = "./filtered_feature_bc_matrix")
+E13vR.data <- Read10X(data.dir = "./data/filtered_feature_bc_matrix")
 E13vR <- CreateSeuratObject(counts = E13vR.data, project = "E13", min.cells = 3, min.features = 200)
 ```
 
