@@ -21,7 +21,7 @@ a)	Use Nkx2-2 gene as marker for proliferative cells, projecting its expression 
 # Seurat library also allows one to calculate geneset activity scores, or module scores as they call it. Basically it is a calculation that approximates how active certain set of genes is in each cells. And this number then can be projected into UMAP again. Below we calculate cell cycle related scores, please note that genes which are linked to cell-cycle stage and progression are defined within Seurat as ready sets. Following plots show scores over UMAP for various stages of cell cycle as well as best guess of the Seurat functions that in which stage each cell has been at the time of fixation
 ```
 
-b) Calculating cell cycle score for cells as projecting it to UMAP (Question 9)
+b) Calculating cell cycle score for cells as projecting it to UMAP
 ```{r}
 # A list of cell cycle markers, from Tirosh et al, 2015, is loaded with Seurat into cc.genes object.  We can
 # segregate this list into markers of G2/M phase and markers of S phase
@@ -30,6 +30,8 @@ g2m.genes <- str_to_title(cc.genes$g2m.genes)
 
 # Use CellCycleScoring() function from Seurat to calculate scores into you dataobject
 # Plot S score and G2M score as they would be gene expression values
+
+# SA Question 9: What does the color in UMAP for each cell mean?
 ```
 # 2 Fetch WikiPathways data
 ```{r Fetch WikiPathways data}
@@ -41,14 +43,20 @@ wpid2gene <- wp2gene %>% dplyr::select(wpid,gene) #TERM2GENE
 wpid2name <- wp2gene %>% dplyr::select(wpid,name) #TERM2NAME
 ```
 
-a) Calculate and plot ORA for WikiPathways (Question 10)
+a) Calculate and plot ORA for WikiPathways
 ```{r Calculate ORA}
 # Calculate equivalent steps for WikiPathways ORA as previous ORA analyses
+
+# SA Question 10: What is the most significant disease/syndrome association to these genes?
 ```
 
 b) Explore WikiPathways for further insight
 ```{r}
 # Wikipathways can be further studied on browser
+```
+
+```{r}
+# SA Question 11: Can you identify the early proliferative progenitors that give rise to post-mitotic serotonergic neuron precursors? How would you approach this question?
 ```
 
 # 3	Find Nkx2-2 positive progenitor and Fev positive precursor cell groups. Do differential expression comparison between these two groups to characterize main differences in their transcriptomes.
