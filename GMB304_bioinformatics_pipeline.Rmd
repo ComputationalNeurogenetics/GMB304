@@ -17,9 +17,9 @@ output:
 ### Please note that this file contains mixture of R-code and something called rmarkdown. For your work in this course you can ignore rmarkdown code as it is just used to form this document and its html version. Rmarkdown code is above this text as well as around each "chunk" of R code below, so any line of form of ```{r }" or ``` are rmarkdown code and R code of the chunk in question is between those lines.
 ```
 
-```{r Install additional libraries, echo=FALSE, message=FALSE}
+```{r Install additional libraries, echo=FALSE, message=FALSE, eval=FALSE}
 ### R image used in CSC notebooks environment does not yet have all libraries installed. You should install missing ones.
-BiocManager::install(c("DOSE","clusterProfiler", "org.Mm.eg.db","pathview", "msigdbr","rWikiPathways","magick"), update = FALSE)
+#BiocManager::install(c("DOSE","clusterProfiler", "org.Mm.eg.db","pathview", "msigdbr","rWikiPathways","magick"), update = FALSE)
 
 ### In the end answer "n" to question to update some other packages 
 ```
