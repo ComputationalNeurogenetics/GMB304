@@ -38,6 +38,7 @@ library(pathview)
 library(msigdbr)
 library(rWikiPathways)
 library(magick)
+library(KEGG.db)
 ```
 
 ```{r}
@@ -270,7 +271,8 @@ dotplot(Molecular.Sign.ORA, showCategory = 20)
 ```{r}
 KEGG.ORA <- enrichKEGG(gene = list.of.genes.up.entrez$ENTREZID,
                  organism     = 'mmu',
-                 pvalueCutoff = 0.05)
+                 pvalueCutoff = 0.05,
+                 use_internal_data = TRUE)
 
 dotplot(KEGG.ORA)
 head(KEGG.ORA)
