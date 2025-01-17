@@ -32,8 +32,8 @@ DimPlot(E13vR.filt)
 ```
 # 2 Fetch WikiPathways data
 ```{r Fetch WikiPathways data}
-wp.mm.gmt <- rWikiPathways::downloadPathwayArchive(organism="Mus musculus", format = "gmt", date="20241210", destpath="~/my-work/")
-wp2gene <- readPathwayGMT(wp.mm.gmt)
+wp.mm.gmt <- rWikiPathways::downloadPathwayArchive(organism="Mus musculus", format = "gmt", date="20241210",destpath="~/my-work/")
+wp2gene <- readPathwayGMT(paste("~/my-work/",wp.mm.gmt,sep=""))
 wpid2gene <- wp2gene %>% dplyr::select(wpid,gene) #TERM2GENE
 wpid2name <- wp2gene %>% dplyr::select(wpid,name) #TERM2NAME
 ```
