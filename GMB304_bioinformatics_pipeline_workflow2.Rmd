@@ -58,7 +58,7 @@ wp.mm.gmt <- rWikiPathways::downloadPathwayArchive(organism="Mus musculus", form
 wp2gene <- readPathwayGMT(paste("~/my-work/",wp.mm.gmt,sep=""))
 
 # Or you can read the data from local gmt file that have been downloaded earlier
-wp2gene <- readPathwayGMT("~/GMB304/wikipathways-20201110-gmt-Mus_musculus.gmt")
+wp2gene <- readPathwayGMT("~/GMB304/data/wikipathways-20201110-gmt-Mus_musculus.gmt")
 wpid2gene <- wp2gene %>% dplyr::select(wpid,gene) #TERM2GENE
 wpid2name <- wp2gene %>% dplyr::select(wpid,name) #TERM2NAME
 ```
