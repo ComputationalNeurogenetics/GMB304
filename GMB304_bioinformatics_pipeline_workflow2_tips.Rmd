@@ -33,36 +33,50 @@ g2m.genes <- str_to_title(cc.genes$g2m.genes)
 
 # SA Question 9: What does the color in UMAP for each cell mean?
 ```
-# 2 Fetch WikiPathways data
-```{r Fetch WikiPathways data}
-#
-# This step is bit tricky and given ready here
-wp.mm.gmt <- rWikiPathways::downloadPathwayArchive(organism="Mus musculus", format = "gmt", destpath = "~/my-work/")
-wp2gene <- readPathwayGMT(wp.mm.gmt)
-wpid2gene <- wp2gene %>% dplyr::select(wpid,gene) #TERM2GENE
-wpid2name <- wp2gene %>% dplyr::select(wpid,name) #TERM2NAME
-```
 
-a) Calculate and plot ORA for WikiPathways
-```{r Calculate ORA}
-# Calculate equivalent steps for WikiPathways ORA as previous ORA analyses
-
-# SA Question 10: What is the most significant disease/syndrome association to these genes?
-```
-
-b) Explore WikiPathways for further insight
-```{r}
-# Wikipathways can be further studied on browser
-```
-
-```{r}
-# SA Question 11: Can you identify the early proliferative progenitors that give rise to post-mitotic serotonergic neuron precursors? How would you approach this question?
-```
-
-# 3	Find Nkx2-2 positive progenitor and Fev positive precursor cell groups. Do differential expression comparison between these two groups to characterize main differences in their transcriptomes.
+# 2	Find Nkx2-2 positive progenitor and Fev positive precursor cell groups. Do differential expression comparison between these two groups to characterize main differences in their transcriptomes.
 ```{r}
 # Find Nkx2-2 positive progenitor group with FeaturePlot
 # Find Fev positive precursor cell group with FeaturePlot
 # Run FindMarkers() between these groups
 # What do you find? Would it make sense to look some ORA enrichment among genes specific for either one?
+```
+
+# 3 Find GABAergic neurons in the dataset 
+```{r}
+# Remember that GABAergic neurons are marked by Gad1 and Gad2 genes
+# Draw FeaturePlot for these genes to identify main clusters of GABAergic neurons
+```
+
+# 4 Find other genes marking GABAergic neurons when compared to the rest of the cells
+```{r}
+# Perform DEG search between GABAergic neurons and the rest of the cells
+# What are the top markers of GABAergic neurons in this dataset?
+```
+
+# Extra fetch WikiPathways data
+```{r Fetch WikiPathways data}
+# This exercise requires rWikiPathways package and it fethes data from WikiPathways database, however this haven't been working properly any more. So I have downloaded the data manually on 10th Dec 2024 and placed it to my working directory. Below is the code that would fetch the data automatically if it worked.
+wp.mm.gmt <- rWikiPathways::downloadPathwayArchive(organism="Mus musculus", format = "gmt", date="20241210",destpath="~/my-work/")
+wp2gene <- readPathwayGMT(paste("~/my-work/",wp.mm.gmt,sep=""))
+
+# Or you can read the data from local gmt file that have been downloaded earlier
+wp2gene <- readPathwayGMT("~/GMB304/data/wikipathways-20201110-gmt-Mus_musculus.gmt")
+wpid2gene <- wp2gene %>% dplyr::select(wpid,gene) #TERM2GENE
+wpid2name <- wp2gene %>% dplyr::select(wpid,name) #TERM2NAME
+```
+
+a) Calculate and plot ORA for WikiPathways (Question 10)
+```{r Calculate ORA}
+Wiki.ORA <- enricher(list.of.genes.up.entrez$ENTREZID, TERM2GENE = wpid2gene, TERM2NAME = wpid2name)
+ewp <- DOSE::setReadable(Wiki.ORA, org.Mm.eg.db, keyType = "ENTREZID")
+dotplot(Wiki.ORA, showCategory = 20)
+head(Wiki.ORA)
+```
+
+b) Explore WikiPathways for further insight
+```{r}
+ewp.wpids <- ewp$ID
+url <- getPathwayInfo("WP1266")$url
+browseURL(url)
 ```
