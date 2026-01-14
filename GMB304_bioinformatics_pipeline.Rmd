@@ -18,7 +18,7 @@ output:
 ```
 
 ```{r Install additional libraries, echo=FALSE, message=FALSE, eval=FALSE}
-### R image used in CSC notebooks environment does not yet have all libraries installed. You should install missing ones.
+### If R image used in CSC notebooks environment does not have all libraries installed. You should install missing ones.
 #BiocManager::install(c("DOSE","clusterProfiler", "org.Mm.eg.db","pathview", "msigdbr","rWikiPathways","magick"), update = FALSE)
 
 ### In the end answer "n" to question to update some other packages 
